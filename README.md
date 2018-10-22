@@ -1,88 +1,88 @@
-Monero is a secure, private cryptocurrency. You can learn more about Monero at [getmonero.org](https://getmonero.org).
+Monero безопасная, конфиденциальная криптовалюта. Вы можете узнать больше о Monero по этому адресу [getmonero.org](https://getmonero.org).
 
-`monero-blockchain-blackball` is a privacy-enhancing tool that can increase the effectiveness of ring signatures. This tool can be used to avoid including outputs that are known to be spent in other transactions. If you exclude these known-spent outputs, other higher-quality outputs can be included in your ring signatures, thus improving your privacy.
+`monero-blockchain-blackball` инструмент усиления конфиденциальности, который может повысить эффективность кольцевых подписей. Это инструмент может быть использован чтобы избежать включения выходов, о которых известно что они были потрачены в других транзакциях. Если вы исключите выходы, трата которых уже известна, другие выходы более высокого качества могут быть включены в вашу кольцевую подпись, усиливая конфиденциальность вашей транзакции.
 
-This website contains several resources for running the tool yourself or downloading a blackball database that we have generated. If you care about your privacy and do not want to trust us, then you should run the tool yourself. If you feel comfortable trusting me and favor convenience, you can download the database that we have prepared. It is possible that our databases could reduce your privacy if we are acting maliciously.
+Данный сайт содержит материал для самостоятельного использования инструмента или для загрузки blackball базы, которую мы сгенерировали. Если вы беспокоитесь о вашей конфиденциальности и не хотите доверять нам, тогда вы должны использовать инструмент самостоятельно. Если вы не переживаете доверяя мне и уените удобство, можете загрузить базу, которуб мы подготовили. Есть вероятность, что наши базы снизят вашу конфиденциальность, в случае если мы действуем злонамеренно.
 
-Keep in mind that a blackball database is only one tool you can use to improve your privacy on Monero. It is not a perfect solution, and it is typically a lagging benefit. For example, if there is an upcoming chain split, a blackball database will provide some protection a few days after the split, but it will not be especially helpful before the split or shortly after. When in doubt, play it safe.
+Имейте ввиду что blackball база только один из инструментов которые вы можете использовать для усилиние вашей конфиденциальности в Monero. Это не идеальное решение и как правило запаздалая польза. Например, если грядет разделение цепи, blackball база предоставит некоторую защиту спустя несколько дней после разделения, но будет бесполезна до разделения или сразу после. Всегда когда сомневаетесь, не рискуйте.
 
-# Running monero-blockchain-blackball
+# Запуск monero-blockchain-blackball
 
-You can run the `monero-blockchain-blackball` tool, available in Monero 0.12 (May 2018) and later, to build a local database. This is strongly recommended if you can take the time to do it.
+Вы можете запустить инструмент `monero-blockchain-blackball`, доступный в Monero 0.12 (Май 2018) и следующих, для создания локальной базы. Настоятельно рекомендуется, если есть возможность, выделить на это время.
 
-Unfortunately the tool is a little clunky and slow, so expect it to have some issues and take several days. You should have already synced the full Monero blockchain locally any the blockchains of any Monero forks that you want to test against. You also need a decently fast CPU and hard drive. Luckily, the tool is getting better all the time.
+К сожалению инструмент немного корявый и медленный, так что приготовьтесь к некоторым проблемам и что это займет несколько дней. У вас должен быть локальный полностью синхронизированный блокчейн любого из Monero форков которым вы собираетесь протестировать. Вам также нужен довольно быстрый процессор и диск. С счастью, инструмент постоянно совершенствуется.
 
-To run the tool, navigate to the latest CLI or GUI tools available on [getmonero.org](https://getmonero.org/downloads). You should see a tool called `monero-blockchain-blackball`. Open a terminal/command prompt for the following operating systems. You can optionally append `--check-subsets` to perform a more verbose test for a significant decrease in performance. If you want to only check recent outputs that are likely to be selected to save a significant amount of time, run it with `--rct-only`.
+Для запуска иснтрумента, перейдите к последним CLI или GUI инструментам доступным на [getmonero.org](https://getmonero.org/downloads). Вы должны найти инструмент под названием `monero-blockchain-blackball`. Откройте терминал/командную строку в соответствующей операционной системе. Вы опционально можете добавить `--check-subsets` для запуска более подробного теста, что значительно снизит производительность. Если вы хотите проверить только недавние выходы, которые скорее всего и будут выбраны, для значительного сокращения времени, запустите с параметром `--rct-only`.
 
 ### Linux / MacOS
 
 `monero-blockchain-blackball ~/.bitmonero/lmdb /path/to/other/blockchain/database`
 
-Example: `monero-blockchain-blackball ~/.bitmonero/lmdb /home/monero_fork/lmdb --rct-only`
+Пример: `monero-blockchain-blackball ~/.bitmonero/lmdb /home/monero_fork/lmdb --rct-only`
 
 ### Windows
 
 `monero-blockchain-blackball.exe C:\ProgramData\bitmonero\lmdb \path\to\other\blockchain\database`
 
-Example: `monero-blockchain-blackball.exe C:\ProgramData\bitmonero\lmdb C:\ProgramData\monero_fork\lmdb --rct-only`
+Пример: `monero-blockchain-blackball.exe C:\ProgramData\bitmonero\lmdb C:\ProgramData\monero_fork\lmdb --rct-only`
 
 ---
 
-Now, the file needs to be converted to work with the wallet software. Follow [these steps](https://monero.stackexchange.com/questions/10042/how-can-i-convert-a-blackball-lmdb-database-into-a-wallet-readable-format) to convert the file to a wallet-readable format. This is honestly the most tricky part.
+Итак, файл должен быть конвертирован для работы с ПО кошелька. Следуйте [этим шагам](https://monero.stackexchange.com/questions/10042/how-can-i-convert-a-blackball-lmdb-database-into-a-wallet-readable-format) чтоыб конфертировать файл в формат читаемый кошельком. Это честно говоря самая сложная часть.
 
-# Downloading our blackball databases
+# Загрузите наши blackball базы
 
-We offer two blackball databases. One is light, small, and only contains recent RingCT (RCT) outputs. The other is a verbose database with as many bad outputs as possible. Check the dates - it's simpler for us to update the smaller databases, so they may be updated more frequently.
+Мы предоставляем две blackball базы. Одна легкая, небольшая, и содержит только недавние выходы RingCT (RCT). Другая подробная база с максимальным количеством плохих выходов. Проверяйте дату - для на проще обновлять меньшие базы, поэтому они могут обновляться чаще.
 
-### RingCT Only
+### База только RingCT
 
-[Direct download link](https://drive.google.com/uc?export=download&id=1r1h9hEVzJN5XsUnsCnfGesWmzovRE3Qo)
+[Прямая ссылка для скачивания](https://drive.google.com/uc?export=download&id=1r1h9hEVzJN5XsUnsCnfGesWmzovRE3Qo)
 
-[Signature file](https://drive.google.com/uc?export=download&id=1-HCabvc9CNQnb87msJFrbSwx83OKPCbc)
+[Сигнатура файла](https://drive.google.com/uc?export=download&id=1-HCabvc9CNQnb87msJFrbSwx83OKPCbc)
 
-This file contains outputs from the following:
+Этот файл сожержит выходы из:
 
-* Monero from January 2017 through 27 August 2018
-* Monerov6 (XMO, XMC) through 27 August 2018
-* MoneroV (XMV) through 27 August 2018
+* Monero с Января 2017 по 27 Августа 2018
+* Monerov6 (XMO, XMC) по 27 Августа 2018
+* MoneroV (XMV) по 27 Августа 2018
 
-### Verbose
+### Подробная база
 
-[Direct download link](https://drive.google.com/uc?export=download&id=1zPer9BqsIno8ZI_RMQuRFehiAdx8kbyZ)
+[Прямая ссылка для скачивания](https://drive.google.com/uc?export=download&id=1zPer9BqsIno8ZI_RMQuRFehiAdx8kbyZ)
 
-[Signature file](https://drive.google.com/uc?export=download&id=1yr0yhWSmK4Ng1IAY8RDlY048OAZ0uoQo)
+[Сигнатура файла](https://drive.google.com/uc?export=download&id=1yr0yhWSmK4Ng1IAY8RDlY048OAZ0uoQo)
 
-This file contains outputs from the following:
+Этот файл сожержит выходы из:
 
-* Monero through 27 August 2018
-* Monerov6 (XMO, XMC) through 27 August 2018
-* MoneroV (XMV) through 27 August 2018
+* Monero с Января 2017 по 27 Августа 2018
+* Monerov6 (XMO, XMC) по 27 Августа 2018
+* MoneroV (XMV) по 27 Августа 2018
 
-### Pools
+### Пулы
 
-You can also include outputs that are known to be spent in public pool transactions. This file should be used in addition to any of the ones above until they work together (WIP). See [sneurlax's work](https://github.com/sneurlax/xmreuse).
+Вы также можете включить выходы, трата которых известа в транзакциях публичных пулов. Этот файл должен быть использован в дополнение к любой из вышеуказанных баз, пока они не могут работать вместе (Работы ведуться). Смотрите [работу sneurlax'а](https://github.com/sneurlax/xmreuse).
 
-[Direct download link](https://drive.google.com/uc?export=download&id=1bFHsAXkN01tElcjU2dtJuLtqMCU_lDuk)
+[Прямая ссылка для скачивания](https://drive.google.com/uc?export=download&id=1bFHsAXkN01tElcjU2dtJuLtqMCU_lDuk)
 
-[Signature file](https://drive.google.com/uc?export=download&id=1xbcmvm2v1l-DVARghCgGInYfz_B3m2gl)
+[Сигнатура файла](https://drive.google.com/uc?export=download&id=1xbcmvm2v1l-DVARghCgGInYfz_B3m2gl)
 
-This file contains outputs from the following:
+Этот файл сожержит выходы из:
 
-* HashVault through 26 August 2018
-* XMRPool through 4 September 2018
-* SupportXMR through 27 August 2018
+* HashVault по 26 Августа 2018
+* XMRPool по 4 Сентября 2018
+* SupportXMR по 27 Августа 2018
 
-### Instructions for Use
+### Инструкции по использованию
 
-Download the file and place it anywhere.
+Скачайте файл, сохранив где угодно.
 
-In the GUI, you can go to Advanced -> Shared RingDB. Then under "Filename with outputs to blackball", select the `rct-only.txt` or `all.txt` file you just downloaded and click `Load`.
+В GUI, вы можете пройти в Дополнительно -> Общая RingDB. Затем под "Имя файла с выходами для blackball", выберите файл `rct-only.txt` или `all.txt`, который только что загрузили и нажмите `Загрузить`.
 
-In the CLI, run `blackball <filename> add`
+В CLI, запустите `blackball <имя файла> add`
 
-Note that the file path in the wallet must not contain any spaces.
+Обратите внимание что путь к файлу не должен содержать пробелов.
 
-# More Information
+# Дополнительная информация
 
 https://monero.stackexchange.com/questions/10039/how-can-i-import-a-blackball-database-to-improve-my-privacy/
 
